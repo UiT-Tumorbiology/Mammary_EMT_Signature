@@ -17,7 +17,7 @@ heatmap_data <- subset(expr, (id %in% annotation2$Identifier))
 #Transform the expression values into linear form
 rownames(heatmap_data) <- heatmap_data$id
 heatmap_data <- heatmap_data[,-c(1,2)]
-heatmap_data <- 2^(heatmap_data - 1)
+heatmap_data <- 2^heatmap_data - 1
 heatmap_data <- as.data.frame(t(scale(t(heatmap_data))))
 
 #Setting expression matrix and information files in same order
