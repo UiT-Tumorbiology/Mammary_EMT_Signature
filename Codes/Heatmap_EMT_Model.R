@@ -7,7 +7,7 @@ library(dplyr)
 library(dendsort)
 
 #Changing the work directory
-setwd("C:/Users/ssa214/UiT Office 365/O365-PhD_Saikat - General/bulk_EMT/Peer review of article, Frontiers/Github")
+setwd("~/Github")
 #Import the data
 expr <- read.csv("Genes_in_model.csv", sep = ";", as.is = T, row.names = 1) #Expression matrix
 annotation <- read.csv("EMT_Model_Samples.csv", sep = ";", as.is = T, row.names = 1)
@@ -33,7 +33,6 @@ quantile_breaks <- function(xs, n = 10) {
 h_breaks <- quantile_breaks(h, n = 11)
 h_breaks
 
-rm(col_order)
 column_dend = as.dendrogram(hclust(dist(t(h)))) #To find the sample order and if they are separating based on epithelial and mesenchymal
 
 plot(column_dend) #Visualize the dendogram
@@ -48,8 +47,7 @@ col_fun <- colorRamp2(quantile_breaks(h, n = 11), c("#1e90ff", "#0479f5", "#0467
 #Setting up the row annotation
 ha <- HeatmapAnnotation("Cell State" = annotation$Cell_State,
                           col=list("Cell State" = c("Epithelial" = "lightslateblue",
-                                                "Plastic" = "darkseagreen4",
-                                                "Mesenchymal" = "darkred")),
+                                                    "Mesenchymal" = "darkred")),
                         simple_anno_size = unit(0.30, "cm"),
                         border = T,
                         annotation_name_gp= gpar(fontsize = 8.5,fontface="bold"),
@@ -58,7 +56,7 @@ ha <- HeatmapAnnotation("Cell State" = annotation$Cell_State,
 
 #Creating the heatmap object
 ht <- Heatmap(h,col = col_fun,
-              cluster_columns = column_dend,
+              cluster_columns = FALSE,
               name = "Expression Values",
               show_heatmap_legend = T ,
               top_annotation = ha,
@@ -80,7 +78,7 @@ ht <- Heatmap(h,col = col_fun,
               row_gap = unit(c(0.5,0.5,0.5,0.5), "mm")) #setting the gap for each clusters
 
 #Export the figure to a pdf file
-pdf("C:/PhD/Sub_projects/bulk_EMT/Combined/Complexheatmap/New_analysis/Final Heatmaps/heatmap_new_trial_resized_new.pdf",  width=12,height=16)
+pdf("EMT_Model.pdf",  width=12,height=16)
 draw(ht,  merge_legend=TRUE, padding = unit(c(2, 2, 2, 2), "mm"))
 dev.off()
 
