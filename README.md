@@ -1,5 +1,5 @@
 # Mammary_EMT_Signature
-This repository includes the scripts used for generating the figures in the under-review article:  
+This repository includes the scripts used for generating the figures in the article:  
   
 **Identification of a core EMT signature that separates basal-like breast cancers into partial- and post-EMT subtypes**  
 Erik Knutsen*, Saikat Das Sajib, Tonje Fiskaa, James Lorens, Thorarinn Gudjonsson, Gunhild M. Mælandsmo, Steinar Daae Johansen, Ole Morten Seternes, Maria Perander*  
